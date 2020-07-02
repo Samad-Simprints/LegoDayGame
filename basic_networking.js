@@ -20,7 +20,8 @@ io.on('connection', function(socket){
 
 ///////////////Start the server and such
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  // res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/test_1.html');
 });
 
 
