@@ -77,10 +77,10 @@ function create ()
 
     
     this.physics.add.collider(player, layer);
+    this.physics.add.collider(bombs, layer);
 
     this.physics.add.overlap(player, stars, collectStar, null, this);
     this.physics.add.collider(player, bombs, hitBomb, null, this);
-    this.physics.add.collider(bombs, layer, bombChangeDir, null, this);
     var bomb = bombs.create(500, 200, 'bomb');
     bomb.setVelocity(0, -100);
     bomb.setBounce(1);
