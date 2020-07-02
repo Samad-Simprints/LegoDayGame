@@ -1,0 +1,19 @@
+name: scp files
+on: [push]
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: copy file via ssh key
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.host }}
+        key: ${{ secrets.secretkey }}
+        username: ${{ secrets.user }}
+        port: ${{ secrets.port }}
+        source: "*"
+        target: "html"
+
