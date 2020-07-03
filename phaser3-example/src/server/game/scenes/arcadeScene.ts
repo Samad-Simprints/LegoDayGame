@@ -71,15 +71,17 @@ export default class MainScene extends Phaser.Scene {
     // layer.setCollisionByExclusion([-1]);
 
     // generate the level
-    level.forEach((row, y) => {
-      for (let x = 0; x < row.length; x++) {
-        const xx = x * this.map.tileSize + this.map.margin.x
-        const yy = y * this.map.tileSize + this.map.margin.y
-        // if (row[x] === 'X') this.boxGroup.add(new Box(this, this.newId(), xx, yy))
-        if (row[x] === 'G') this.star = new Star(this, this.newId(), xx, yy)
-        if (row[x] === 'M') this.mummyGroup.add(new Mummy(this, this.newId(), xx, yy))
-      }
-    })
+    // level.forEach((row, y) => {
+    //   for (let x = 0; x < row.length; x++) {
+    //     const xx = x * this.map.tileSize + this.map.margin.x
+    //     const yy = y * this.map.tileSize + this.map.margin.y
+    //     // if (row[x] === 'X') this.boxGroup.add(new Box(this, this.newId(), xx, yy))
+    //     // if (row[x] === 'G') this.star = new Star(this, this.newId(), xx, yy)
+    //     if (row[x] === 'M') this.mummyGroup.add(new Mummy(this, this.newId(), xx, yy))
+    //   }
+    // })
+
+    this.mummyGroup.add(new Mummy(this, this.newId(), 100, 100);
 
     if (PHYSICS_DEBUG) {
       this.add
@@ -151,16 +153,16 @@ export default class MainScene extends Phaser.Scene {
         dude.gotHit()
       }
     })
-    // @ts-ignore
-    this.physics.add.overlap(this.dudeGroup, this.star, (dude: Dude, star: Star) => {
-      if (dude.dead) return
-      dude.kill()
+    // // @ts-ignore
+    // this.physics.add.overlap(this.dudeGroup, this.star, (dude: Dude, star: Star) => {
+    //   if (dude.dead) return
+    //   dude.kill()
 
-      let nextLevel = this.level + 1 >= this.map.countTotalLevels() ? 0 : this.level + 1
-      let socket = this.roomManager.ioNspGame.sockets[dude.socketId] as any
+    //   // let nextLevel = this.level + 1 >= this.map.countTotalLevels() ? 0 : this.level + 1
+    //   // let socket = this.roomManager.ioNspGame.sockets[dude.socketId] as any
 
-      this.roomManager.changeRoom(socket, 'ArcadeScene', nextLevel)
-    })
+    //   // this.roomManager.changeRoom(socket, 'ArcadeScene', nextLevel)
+    // })
   }
 
   /** Sends the initial state to the client */
@@ -169,7 +171,7 @@ export default class MainScene extends Phaser.Scene {
 
     // SyncManager.prepareFromPhaserGroup(this.boxGroup, objects)
     SyncManager.prepareFromPhaserGroup(this.dudeGroup, objects)
-    SyncManager.prepareFromPhaserSprite(this.star, objects)
+    // SyncManager.prepareFromPhaserSprite(this.star, objects)
 
     return SyncManager.encode(objects)
   }
@@ -205,17 +207,17 @@ export default class MainScene extends Phaser.Scene {
       this.objectsToSync = SyncManager.mergeObjectToSync(cleanObjectToSync, this.objectsToSync)
     }
 
-    if (this.star && this.star.sync) {
-      let starObj = {
-        skin: this.star.skin,
-        tint: this.star.tint,
-        id: this.star.id,
-        x: this.star.body.position.x + this.star.body.width / 2,
-        y: this.star.body.position.y + this.star.body.height / 2
-      }
-      prepareObjectToSync(starObj)
-      this.star.sync = false
-    }
+    // if (this.star && this.star.sync) {
+    //   let starObj = {
+    //     skin: this.star.skin,
+    //     tint: this.star.tint,
+    //     id: this.star.id,
+    //     x: this.star.body.position.x + this.star.body.width / 2,
+    //     y: this.star.body.position.y + this.star.body.height / 2
+    //   }
+    //   prepareObjectToSync(starObj)
+    //   this.star.sync = false
+    // }
 
     // @ts-ignore
     this.mummyGroup.children.iterate((child: Mummy) => {
