@@ -72,7 +72,9 @@ export default class Dude extends Phaser.Physics.Arcade.Sprite {
     else if (this.updates.right) this.setVelocityX(400)
     else this.setVelocityX(0)
 
-    if (this.updates.up && this.body.blocked.down) this.setVelocityY(-600)
+    if (this.updates.up) this.setVelocityY(-600)
+    else if (this.updates.down) this.setVelocityY(600)
+    else this.setVelocityY(0)
 
     this.animation = this.body.velocity.x >= 0.5 ? 'right' : this.body.velocity.x <= -0.5 ? 'left' : 'idle'
 

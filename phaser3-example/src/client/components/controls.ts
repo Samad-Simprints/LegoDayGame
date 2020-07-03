@@ -2,6 +2,7 @@ export default class Controls {
   left = false
   right = false
   up = false
+  down = false
   controls: Control[] = []
   none = true
   prevNone = true
@@ -22,6 +23,9 @@ export default class Controls {
           case 'up':
             this.up = down
             break
+          case 'down':
+            this.down = down
+            break
         }
       }
     }
@@ -35,14 +39,15 @@ export default class Controls {
     let left = new Control(scene, 0, 0, 'left').setRotation(-0.5 * Math.PI)
     let right = new Control(scene, 0, 0, 'right').setRotation(0.5 * Math.PI)
     let up = new Control(scene, 0, 0, 'up')
-    this.controls.push(left, right, up)
+    let down = new Control(scene, 0, 0, 'down')
+    this.controls.push(left, right, up, down)
     this.resize()
 
     this.scene.events.on('update', this.update, this)
   }
 
   controlsDown() {
-    return { left: this.left, right: this.right, up: this.up, none: this.none }
+    return { left: this.left, right: this.right, up: this.up, down: this.down, none: this.none }
   }
 
   resize() {
@@ -56,6 +61,7 @@ export default class Controls {
         y: h
       },
       { x: controlsRadius + 214, y: h },
+      { x: w, y: h },
       { x: w, y: h }
     ]
     this.controls.forEach((ctl, i) => {
@@ -65,14 +71,15 @@ export default class Controls {
   }
 
   update() {
-    this.none = this.left || this.right || this.up ? false : true
+    this.none = this.left || this.right || this.up || this.down ? false : true
 
     if (!this.none || this.none !== this.prevNone) {
       let total = 0
       if (this.left) total += 1
       if (this.right) total += 2
       if (this.up) total += 4
-      if (this.none) total += 8
+      if (this.down) total += 8
+      if (this.none) total += 16
       this.socket.emit('U' /* short for updateDude */, total)
     }
 

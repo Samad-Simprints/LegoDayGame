@@ -122,7 +122,8 @@ export default class MainScene extends Phaser.Scene {
           left: b === 1 || b === 5 ? true : false,
           right: b === 2 || b === 6 ? true : false,
           up: b === 4 || b === 6 || b === 5 ? true : false,
-          none: b === 8 ? true : false
+          down: b === 8 || b === 10 || b === 9 ? true : false,
+          none: b === 16 ? true : false
         }
         dudes[0].setUpdates(updates)
       }
