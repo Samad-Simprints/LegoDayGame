@@ -34,6 +34,9 @@ export default class MainScene extends Phaser.Scene {
   cursors: Cursors | undefined
   controls: Controls | undefined
   level: number = 0
+  map: any
+  tileset: any
+  layer: any
 
   constructor() {
     super({ key: 'MainScene' })
@@ -58,12 +61,12 @@ export default class MainScene extends Phaser.Scene {
       .setDepth(100)
       .setScrollFactor(0)
 
-    // var map = this.make.tilemap({ key: 'map' });
-    let map = this.add.tilemap('map');
-    let tiles = map.addTilesetImage('black', 'tiles');
-    // var layer = map.createStaticLayer(0, tiles, 0, 0);
-    // layer.setCollisionByExclusion([-1]);
-
+    console.log("main scene map")
+    this.map = this.make.tilemap({ key: 'tilemap_csv' });
+    console.log(this.map)
+    this.tileset = this.map.addTilesetImage('black', 'black_png', 10, 10);
+    this.layer = this.map.createStaticLayer('walls', this.tileset, 0, 0);
+    console.log("main scene map done")
     // let starfield = this.add.tileSprite(world.x, world.y, world.width, world.height, 'starfield').setOrigin(0)
 
     this.cursors = new Cursors(this, socket)
@@ -71,8 +74,8 @@ export default class MainScene extends Phaser.Scene {
     let texts = new Texts(this)
     let fullscreenBtn = fullscreenButton(this)
 
-    this.cameras.main.setBounds(world.x, world.y, world.width, world.height)
-
+    // this.cameras.main.setBounds(world.x, world.y, world.width, world.height)
+    this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     socket.on('getPong', (id: string) => {
       if (this.latency.id !== id) return
       this.latency.canSend = true

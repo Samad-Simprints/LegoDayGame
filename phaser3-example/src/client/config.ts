@@ -8,8 +8,8 @@ const DEFAULT_HEIGHT = 1000
 export const world = {
   x: 0,
   y: 0,
-  width: 2560,
-  height: 1200
+  width: 1000,
+  height: 1000
 }
 
 const config = {
