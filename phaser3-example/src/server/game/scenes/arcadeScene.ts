@@ -12,7 +12,7 @@ import { SKINS } from '../../../constants'
 export default class MainScene extends Phaser.Scene {
   id = 0
   dudeGroup: Phaser.GameObjects.Group
-  boxGroup: Phaser.GameObjects.Group
+  // boxGroup: Phaser.GameObjects.Group
   mummyGroup: Phaser.GameObjects.Group
   star: Star
   debug: any = {}
@@ -58,7 +58,7 @@ export default class MainScene extends Phaser.Scene {
 
     this.physics.world.setBounds(world.x, world.y, world.width, world.height)
     this.dudeGroup = this.add.group()
-    this.boxGroup = this.add.group()
+    // this.boxGroup = this.add.group()
     this.mummyGroup = this.add.group()
     this.map = new Map(this, world, this.level)
     const level = this.map.getLevel()
@@ -75,7 +75,7 @@ export default class MainScene extends Phaser.Scene {
       for (let x = 0; x < row.length; x++) {
         const xx = x * this.map.tileSize + this.map.margin.x
         const yy = y * this.map.tileSize + this.map.margin.y
-        if (row[x] === 'X') this.boxGroup.add(new Box(this, this.newId(), xx, yy))
+        // if (row[x] === 'X') this.boxGroup.add(new Box(this, this.newId(), xx, yy))
         if (row[x] === 'G') this.star = new Star(this, this.newId(), xx, yy)
         if (row[x] === 'M') this.mummyGroup.add(new Mummy(this, this.newId(), xx, yy))
       }
@@ -139,8 +139,8 @@ export default class MainScene extends Phaser.Scene {
       })
     })
 
-    this.physics.add.collider(this.dudeGroup, this.boxGroup)
-    this.physics.add.collider(this.mummyGroup, this.boxGroup)
+    // this.physics.add.collider(this.dudeGroup, this.boxGroup)
+    // this.physics.add.collider(this.mummyGroup, this.boxGroup)
     // @ts-ignore
     this.physics.add.overlap(this.mummyGroup, this.dudeGroup, (mummy: Mummy, dude: Dude) => {
       if (mummy.dead) return
@@ -167,7 +167,7 @@ export default class MainScene extends Phaser.Scene {
   getInitialState() {
     let objects: any[] = []
 
-    SyncManager.prepareFromPhaserGroup(this.boxGroup, objects)
+    // SyncManager.prepareFromPhaserGroup(this.boxGroup, objects)
     SyncManager.prepareFromPhaserGroup(this.dudeGroup, objects)
     SyncManager.prepareFromPhaserSprite(this.star, objects)
 
@@ -229,19 +229,19 @@ export default class MainScene extends Phaser.Scene {
       prepareObjectToSync(object)
     })
 
-    // @ts-ignore
-    this.boxGroup.children.iterate((child: Box) => {
-      if (child.sync) {
-        let object = {
-          skin: child.skin,
-          id: child.id,
-          x: child.body.position.x + child.body.width / 2,
-          y: child.body.position.y + child.body.height / 2
-        }
-        prepareObjectToSync(object)
-      }
-      child.sync = false
-    })
+    // // @ts-ignore
+    // this.boxGroup.children.iterate((child: Box) => {
+    //   if (child.sync) {
+    //     let object = {
+    //       skin: child.skin,
+    //       id: child.id,
+    //       x: child.body.position.x + child.body.width / 2,
+    //       y: child.body.position.y + child.body.height / 2
+    //     }
+    //     prepareObjectToSync(object)
+    //   }
+    //   child.sync = false
+    // })
     // @ts-ignore
     this.dudeGroup.children.iterate((child: Dude) => {
       child.update()
