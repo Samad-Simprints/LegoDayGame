@@ -1,8 +1,7 @@
 import '@geckos.io/phaser-on-nodejs'
-import commonConfig, { arcadePhysics, matterPhysics } from './config'
+import commonConfig, { arcadePhysics } from './config'
 
 import ArcadeScene from './scenes/arcadeScene'
-import MatterScene from './scenes/matterScene'
 import RoomManager from '../managers/roomManager'
 
 export class PhaserGame extends Phaser.Game {
@@ -14,14 +13,8 @@ export class PhaserGame extends Phaser.Game {
 const Game = (roomManager: RoomManager, roomId: string, options: { scene: string; level: number }) => {
   let config = { ...commonConfig }
 
-  if (options.scene === 'ArcadeScene') {
-    config.scene = [ArcadeScene]
-    config.physics = arcadePhysics
-  }
-  if (options.scene === 'MatterScene') {
-    config.scene = [MatterScene]
-    config.physics = matterPhysics
-  }
+  config.scene = [ArcadeScene]
+  config.physics = arcadePhysics
 
   // @ts-ignore
   config.customEnvironment = true

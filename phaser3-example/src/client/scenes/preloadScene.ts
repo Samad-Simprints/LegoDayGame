@@ -12,7 +12,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image(SKINS.BOX.toString(), 'assets/box.png')
     this.load.image(SKINS.STAR.toString(), 'assets/star.png')
     this.load.image('bug', 'assets/bug.png')
-    this.load.image('starfield', 'assets/starfield.jpg')
+    // this.load.image('starfield', 'assets/starfield.jpg')
     this.load.image('controls', 'assets/controls.png')
     this.load.spritesheet(SKINS.DUDE.toString(), 'assets/dude.png', {
       frameWidth: 32,
@@ -23,6 +23,8 @@ export default class PreloadScene extends Phaser.Scene {
       frameHeight: 64
     })
     this.load.spritesheet(SKINS.MUMMY.toString(), 'assets/mummy37x45.png', { frameWidth: 37, frameHeight: 45 })
+    this.load.tilemapTiledJSON('map', 'assets/tilemap.json');
+    this.load.image('tiles', 'assets/black.png');
   }
 
   create() {
@@ -48,7 +50,7 @@ export default class PreloadScene extends Phaser.Scene {
     socket.on('clientId', (clientId: number) => {
       socket.clientId = clientId
       console.log('Your client id', clientId)
-      this.scene.start('MenuScene', { socket })
+      this.scene.start('MainScene', { scene: 'ArcadeScene', level: 0, socket: socket })
     })
   }
 }

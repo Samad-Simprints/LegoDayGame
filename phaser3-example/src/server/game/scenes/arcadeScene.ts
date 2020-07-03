@@ -63,6 +63,12 @@ export default class MainScene extends Phaser.Scene {
     this.map = new Map(this, world, this.level)
     const level = this.map.getLevel()
 
+
+    // var map = this.make.tilemap({ key: 'map' });
+    // var tiles = map.addTilesetImage('black', 'tiles');
+    // var layer = map.createStaticLayer(0, tiles, 0, 0);
+    // layer.setCollisionByExclusion([-1]);
+
     // generate the level
     level.forEach((row, y) => {
       for (let x = 0; x < row.length; x++) {

@@ -3,8 +3,9 @@ import 'phaser'
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.HEADLESS,
   parent: 'phaser-game',
-  width: 1280,
-  height: 720,
+  width: 1000,
+  height: 1000,
+  backgroundColor: '#ffffff',
   banner: false,
   // @ts-ignore
   audio: false
@@ -18,11 +19,3 @@ export const arcadePhysics = {
   }
 }
 
-export const matterPhysics = {
-  default: 'matter',
-  matter: {
-    gravity: {
-      y: 2
-    }
-  }
-}

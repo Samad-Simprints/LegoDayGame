@@ -1,16 +1,15 @@
 import PreloadScene from './scenes/preloadScene'
-import MenuScene from './scenes/menuScene'
 import MainScene from './scenes/mainScene'
 
-const DEFAULT_WIDTH = 1280
-const DEFAULT_HEIGHT = 720
+const DEFAULT_WIDTH = 1000
+const DEFAULT_HEIGHT = 1000
 
 // the size of the world
 export const world = {
   x: 0,
   y: 0,
   width: 2560,
-  height: 864
+  height: 1200
 }
 
 const config = {
@@ -22,7 +21,7 @@ const config = {
     width: DEFAULT_WIDTH,
     height: DEFAULT_HEIGHT
   },
-  scene: [PreloadScene, MenuScene, MainScene],
+  scene: [PreloadScene, MainScene],
   physics: {
     default: 'matter',
     matter: {

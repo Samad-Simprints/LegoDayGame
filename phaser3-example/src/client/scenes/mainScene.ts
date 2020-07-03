@@ -58,7 +58,14 @@ export default class MainScene extends Phaser.Scene {
       .setDepth(100)
       .setScrollFactor(0)
 
-    let starfield = this.add.tileSprite(world.x, world.y, world.width, world.height, 'starfield').setOrigin(0)
+    // var map = this.make.tilemap({ key: 'map' });
+    let map = this.add.tilemap('map');
+    let tiles = map.addTilesetImage('black', 'tiles');
+    // var layer = map.createStaticLayer(0, tiles, 0, 0);
+    // layer.setCollisionByExclusion([-1]);
+
+    // let starfield = this.add.tileSprite(world.x, world.y, world.width, world.height, 'starfield').setOrigin(0)
+
     this.cursors = new Cursors(this, socket)
     this.controls = new Controls(this, socket)
     let texts = new Texts(this)
@@ -168,7 +175,7 @@ export default class MainScene extends Phaser.Scene {
     })
 
     const resize = () => {
-      starfield.setScale(Math.max(this.cameras.main.height / starfield.height, 1))
+      // starfield.setScale(Math.max(this.cameras.main.height / starfield.height, 1))
       texts.resize()
       if (this.controls) this.controls.resize()
       fullscreenBtn.setPosition(this.cameras.main.width - 16, 16)
