@@ -21,3 +21,8 @@ jobs:
       run: |
         make build
 
+    - name: publish
+      run: |
+        echo ${{ secrets.dockertoken }} | docker login --username "diversemix" --password-stdin
+        docker tag legodaygame diversemix/legodaygame
+        docker push diversemix/legodaygame
