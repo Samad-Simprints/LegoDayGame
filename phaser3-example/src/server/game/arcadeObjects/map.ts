@@ -1,6 +1,6 @@
 export default class Map {
   margin: { x: number; y: number }
-  tileSize = 95
+  tileSize = 10
   levels = [
     [
       '    XXX  M    M      XXXXXX',

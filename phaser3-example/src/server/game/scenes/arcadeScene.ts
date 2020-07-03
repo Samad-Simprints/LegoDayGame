@@ -63,7 +63,8 @@ export default class MainScene extends Phaser.Scene {
     this.map = new Map(this, world, this.level)
     const level = this.map.getLevel()
 
-
+    // var map = this.add.tilemap('tilemap_csv');
+    // var tileset = map.addTilesetImage('black', 'black');
     // var map = this.make.tilemap({ key: 'map' });
     // var tiles = map.addTilesetImage('black', 'tiles');
     // var layer = map.createStaticLayer(0, tiles, 0, 0);

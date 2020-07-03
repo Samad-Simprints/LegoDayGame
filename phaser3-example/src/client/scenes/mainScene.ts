@@ -58,10 +58,9 @@ export default class MainScene extends Phaser.Scene {
       .setDepth(100)
       .setScrollFactor(0)
 
-    // var map = this.make.tilemap({ key: 'map' });
-    let map = this.add.tilemap('map');
-    let tiles = map.addTilesetImage('black', 'tiles');
-    // var layer = map.createStaticLayer(0, tiles, 0, 0);
+    var map = this.add.tilemap('tilemap_csv');
+    var tileset = map.addTilesetImage('black', 'black', 10, 10, 0, 0);
+    var layer = map.createStaticLayer(0, tileset, 0, 0);
     // layer.setCollisionByExclusion([-1]);
 
     // let starfield = this.add.tileSprite(world.x, world.y, world.width, world.height, 'starfield').setOrigin(0)
