@@ -7,6 +7,7 @@ export default class Cursors {
   left = false
   right = false
   up = false
+  down = false
 
   constructor(public scene: Phaser.Scene, public socket: SocketIOClient.Socket) {
     this.cursors = scene.input.keyboard.createCursorKeys()
@@ -15,18 +16,19 @@ export default class Cursors {
   }
 
   cursorsDown() {
-    return { left: this.left, right: this.right, up: this.up, none: this.none }
+    return { left: this.left, right: this.right, up: this.up, down: this.down, none: this.none }
   }
 
   update() {
-    if (!this.cursors.left || !this.cursors.right || !this.cursors.up) return
+    if (!this.cursors.left || !this.cursors.right || !this.cursors.up || !this.cursors.down) return
 
-    this.none = this.cursors.left.isDown || this.cursors.right.isDown || this.cursors.up.isDown ? false : true
+    this.none = this.cursors.left.isDown || this.cursors.right.isDown || this.cursors.up.isDown || this.cursors.down.isDown ? false : true
 
     if (!this.none || this.none !== this.prevNone) {
       this.left = false
       this.right = false
       this.up = false
+      this.down = false
 
       if (this.cursors.left.isDown) {
         this.left = true
@@ -36,6 +38,8 @@ export default class Cursors {
 
       if (this.cursors.up.isDown) {
         this.up = true
+      } else if (this.cursors.down.isDown) {
+        this.down = true
       }
 
       if (!PHYSICS_DEBUG) {
@@ -43,7 +47,8 @@ export default class Cursors {
         if (this.left) total += 1
         if (this.right) total += 2
         if (this.up) total += 4
-        if (this.none) total += 8
+        if (this.down) total += 8
+        if (this.none) total += 16
         this.socket.emit('U' /* short for updateDude */, total)
       }
     }
