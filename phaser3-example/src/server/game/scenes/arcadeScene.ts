@@ -56,6 +56,10 @@ export default class MainScene extends Phaser.Scene {
       this.roomManager.stats.log(`Scene in roomId <b>${this.roomId}</b> has stopped!`)
     })
 
+    // var map = this.make.tilemap({ key: 'tilemap' });
+    // var tileset = map.addTilesetImage('black', 'black_png', 10, 10);
+    // var layer = map.createStaticLayer(0, tileset, 0, 0);
+
     this.physics.world.setBounds(world.x, world.y, world.width, world.height)
     this.dudeGroup = this.add.group()
     // this.boxGroup = this.add.group()
@@ -81,7 +85,7 @@ export default class MainScene extends Phaser.Scene {
     //   }
     // })
 
-    this.mummyGroup.add(new Mummy(this, this.newId(), 100, 100);
+    this.mummyGroup.add(new Mummy(this, this.newId(), 100, 100))
 
     if (PHYSICS_DEBUG) {
       this.add
@@ -141,6 +145,7 @@ export default class MainScene extends Phaser.Scene {
       })
     })
 
+    this.physics.add.collider(this.dudeGroup, this.map)
     // this.physics.add.collider(this.dudeGroup, this.boxGroup)
     // this.physics.add.collider(this.mummyGroup, this.boxGroup)
     // @ts-ignore

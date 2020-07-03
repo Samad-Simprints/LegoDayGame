@@ -23,13 +23,18 @@ export default class PreloadScene extends Phaser.Scene {
       frameHeight: 64
     })
     this.load.spritesheet(SKINS.MUMMY.toString(), 'assets/mummy37x45.png', { frameWidth: 37, frameHeight: 45 })
-    this.load.tilemapCSV('tilemap_csv', 'assets/tilemap_csv.json');
-    this.load.image('black', 'assets/black.png');
+    this.load.tilemapCSV('tilemap_csv', 'assets/tilemap_uncomp.json');
+    this.load.image('black_png', 'assets/black.png');
   }
 
   create() {
     createDudeAnimations(this)
     createMummyAnimation(this)
+
+    // this.map = this.add.tilemap('tilemap_csv');
+    // this.tileset = this.map.addTilesetImage('black', 'black', 10, 10, 0, 0);
+    // this.layer = this.map.createStaticLayer(0, this.tileset, 0, 0);
+    // this.layer.setCollisionByExclusion([-1]);
 
     // connecting to socket.io
     const url = `${location.origin}/G` /* short for stats */
