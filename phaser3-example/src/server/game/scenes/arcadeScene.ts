@@ -146,7 +146,7 @@ export default class MainScene extends Phaser.Scene {
       })
     })
 
-    this.physics.add.collider(this.dudeGroup, this.map)
+    // this.physics.add.collider(this.dudeGroup, this.map)
     // this.physics.add.collider(this.dudeGroup, this.boxGroup)
     // this.physics.add.collider(this.mummyGroup, this.boxGroup)
     // @ts-ignore
