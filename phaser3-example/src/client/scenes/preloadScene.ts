@@ -23,7 +23,7 @@ export default class PreloadScene extends Phaser.Scene {
       frameHeight: 64
     })
     this.load.spritesheet(SKINS.MUMMY.toString(), 'assets/mummy37x45.png', { frameWidth: 37, frameHeight: 45 })
-    this.load.tilemapCSV('tilemap_csv', 'assets/tilemap_uncomp.json');
+    this.load.tilemapTiledJSON('tilemap_csv', 'assets/tilemap_uncomp.json');
     this.load.image('black_png', 'assets/black.png');
   }
 
